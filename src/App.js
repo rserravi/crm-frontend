@@ -3,6 +3,7 @@
 import React from 'react';
 import './App.css';
 import { DefaultLayout } from './layout/Default-Layout';
+import { Dashboard } from './pages/dashboard/Dashboard-page';
 import { Entry } from './pages/entry/entry-page';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
     <div className="App">
       {/*<Entry></Entry> */}
       <DefaultLayout>
-          here we can put componentes here or whatever.
+          <Dashboard></Dashboard>
       </DefaultLayout>
     </div>
   );
