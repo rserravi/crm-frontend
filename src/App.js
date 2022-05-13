@@ -2,12 +2,16 @@
 
 import React from 'react';
 import './App.css';
+import { DefaultLayout } from './layout/Default-Layout';
 import { Entry } from './pages/entry/entry-page';
 
 function App() {
   return (
     <div className="App">
-      <Entry></Entry>
+      {/*<Entry></Entry> */}
+      <DefaultLayout>
+          here we can put componentes here or whatever.
+      </DefaultLayout>
     </div>
   );
 }
