@@ -1,41 +1,49 @@
 [
     {
         "id":1,
+        "subject": "Problem with SSL certificate",
         "status": "Respuesta pendiente",
         "addedAt": "1-10-2021"
     },
     {
         "id":2,
+        "subject": "Bad Login",
         "status": "Respuesta pendiente",
         "addedAt": "5-10-2021"
     },
     {
         "id":3,
+        "subject": "Bug",
         "status": "Respuesta pendiente",
         "addedAt": "7-10-2021"
     },
     {
         "id":4,
+        "subject": "Problem with server",
         "status": "Respuesta pendiente",
         "addedAt": "12-10-2021"
     },
     {
         "id":5,
+        "subject": "Bad configuration",
         "status": "Respuesta pendiente",
         "addedAt": "22-10-2021"
     },
     {
         "id":6,
+        "subject": "Needs changes on the platfom",
         "status": "Respuesta pendiente",
         "addedAt": "24-10-2021"
     },
     {
         "id":7,
+        "subject": "Lost password",
         "status": "Respuesta pendiente",
         "addedAt": "1-11-2021"
     },
     {
         "id":8,
+        "subject": "Cant read the config file",
         "status": "Respuesta pendiente",
         "addedAt": "12-11-2021"
     }
