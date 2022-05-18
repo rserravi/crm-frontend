@@ -3,7 +3,24 @@
         "id":1,
         "subject": "Problem with SSL certificate",
         "status": "Respuesta pendiente",
-        "addedAt": "1-10-2021"
+        "addedAt": "1-10-2021",
+        "history":[
+            {
+                "date": "4-2-2019",
+                "message": "Mi página no entra en modo https",
+                "messageBy":"client"
+            },
+            {
+                "date": "5-2-2019",
+                "message": "Está el certificado SSL activo?",
+                "messageBy":"operator"
+            },
+            {
+                "date": "6-2-2019",
+                "message": "No se que es un SSL",
+                "messageBy":"client"
+            }
+        ]
     },
     {
         "id":2,
