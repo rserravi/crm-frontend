@@ -7,7 +7,7 @@ export const LoginForm = ({ handleOnChange, handleOnSubmit, formSwitcher, email,
         <Container>
             <Row>
                 <Col>
-                    <h1 class="text-info">Client Login</h1>
+                    <h1 className="text-info">Client Login</h1>
                     <hr />
                     <Form onSubmit={handleOnSubmit}>
                         <FormGroup>
