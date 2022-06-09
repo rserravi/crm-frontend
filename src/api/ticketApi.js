@@ -7,7 +7,7 @@ export const getAllTickets = async () => {
                 {headers: 
                     {
                         Authorization:
-                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVAZS5jb20iLCJpYXQiOjE2NTQ3MDgzNTcsImV4cCI6MTY1NDcwOTI1N30.zNBtoxRYKBjxxSwYoZy9lULUisD4pnQs9rkpE4l-S2M",
+                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVAZS5jb20iLCJpYXQiOjE2NTQ3NTY4MzIsImV4cCI6MTY1NDc1NzczMn0.Ctsq4Vqfg3khndArxf_82vj-sAOoA2-YgDMgsUL8aVk",
                     }
                 }
             );
