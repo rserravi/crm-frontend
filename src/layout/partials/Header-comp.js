@@ -2,11 +2,14 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { useNavigate} from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
+import { userLogout } from "../../api/userApi";
 
 export const Header = () => {
    
     const history = useNavigate();
     const LogMeOut = () =>{
+        userLogout();
+        sessionStorage.removeItem("accessJWT");
         history("/");
     }
     return  (

@@ -1,11 +1,16 @@
 import axios from "axios";
 
-const loginUrl = "http://localhost:3001/v1/user/login";
+const rootUrl = "http://localhost:3001/v1";
+const loginUrl = rootUrl + "/user/login";
+const userProfileUrl = rootUrl + "/user";
+const logOutUrl = rootUrl + "/user/logout";
 
-export const userLogin = frmData =>{
+export const userLogin = (frmData) =>{
     return new Promise( async(resolve, reject)=>{
         try {
             const res = await axios.post(loginUrl, frmData);
+
+            resolve(res.data);
 
             if(res.data.status ==="success"){
                 sessionStorage.setItem("accessJWT", res.data.accessJWT);
@@ -14,11 +19,52 @@ export const userLogin = frmData =>{
                     JSON.stringify({refreshJWT: res.data.refreshJWT})
                  );
             }
-            resolve(res.data);
+           
 
             
         } catch (error) {
             reject(error);
         }
     })
+}
+
+export const fetchUser = () =>{
+    return new Promise( async(resolve, reject)=>{
+        try {
+
+            const accessJWT = sessionStorage.getItem("accessJWT");
+            if (!accessJWT){
+                reject("Token not found!");
+            }
+
+            const res = await axios.get(userProfileUrl, {
+                headers: {
+                    Authorization :accessJWT,
+                }
+            });
+
+            resolve(res.data);
+            
+        } catch (error) {
+            console.log(error);
+            reject(error.message);
+        }
+    })
+}
+
+export const userLogout = async() =>{
+    try {
+        const accessJWT = sessionStorage.getItem("accessJWT");
+    if (!accessJWT){
+        console.log("Token not found!");
+    }
+
+    await axios.delete(logOutUrl, {
+        headers: {
+            Authorization :accessJWT,
+        }
+    });
+    } catch (error) {
+        console.log(error);
+    }
 }
