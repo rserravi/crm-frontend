@@ -4,7 +4,7 @@ const rootUrl = "http://localhost:3001/v1";
 const loginUrl = rootUrl + "/user/login";
 const userProfileUrl = rootUrl + "/user";
 const logOutUrl = rootUrl + "/user/logout";
-const newAccessJWTurl = rootUrl + "/tokens"
+const newAccessJWTurl = rootUrl + "/tokens";
 
 export const userLogin = (frmData) =>{
     return new Promise( async(resolve, reject)=>{
@@ -81,7 +81,7 @@ export const userLogout = async() =>{
     try {
         const accessJWT = sessionStorage.getItem("accessJWT");
     if (!accessJWT){
-        console.log("Token not found!");
+        console.log("Token not found! (from userLogout)");
     }
 
     await axios.delete(logOutUrl, {

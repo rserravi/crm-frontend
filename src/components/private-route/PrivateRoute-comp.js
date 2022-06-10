@@ -15,10 +15,10 @@ export const PrivateRoute = (children, ...rest) => {
     const udpdateAccessJWT = async() =>{
       const result = await fetchNewAccessJWT();
       result && dispatch(loginSuccess());
-    }
-    sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
-
-  },[dispatch]);
+    };
+    !sessionStorage.getItem("accessJWT") && localStorage.getItem("crmSite") && udpdateAccessJWT();
+    !isAuth && sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
+  },[dispatch, isAuth]);
 
     if (isAuth) return (
       <Routes>

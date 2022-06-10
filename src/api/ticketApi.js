@@ -1,13 +1,15 @@
 import axios from "axios";
 
+const rootUrl = "http://localhost:3001/v1"
+const getTicketUrl = rootUrl + "/ticket"
+
 export const getAllTickets = async () => {
         try {
             const result = await axios.get(
-                "http://localhost:3001/v1/ticket",
+                getTicketUrl,
                 {headers: 
                     {
-                        Authorization:
-                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVAZS5jb20iLCJpYXQiOjE2NTQ3NTY4MzIsImV4cCI6MTY1NDc1NzczMn0.Ctsq4Vqfg3khndArxf_82vj-sAOoA2-YgDMgsUL8aVk",
+                        Authorization: sessionStorage.getItem("accessJWT"),
                     }
                 }
             );
@@ -16,4 +18,21 @@ export const getAllTickets = async () => {
         } catch (error) {
             console.log(error);
         } 
+};
+
+export const getSingleTicket = async (_id) => {
+    try {
+        const result = await axios.get(
+            getTicketUrl + _id,
+            {headers: 
+                {
+                    Authorization: sessionStorage.getItem("accessJWT"),
+                }
+            }
+        );
+        return result;
+        
+    } catch (error) {
+        console.log(error);
+    } 
 };
