@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types'; // ES6
 import { Container, Row, Col, Form, FormGroup, FormLabel, FormControl, Button, Spinner, Alert } from "react-bootstrap";
 import { loginPending, loginSuccess, loginFail } from "./loginSlice";
@@ -13,6 +13,9 @@ export const LoginForm = ({formSwitcher}) =>{
     const navigation = useNavigate();
 
     const {isLoading, isAuth, error} = useSelector(state => state.login);
+    useEffect(()=>{
+       (sessionStorage.getItem("accessJWT")) && navigation("/dashboard")
+    },[navigation, isAuth]);
     const [email, setEmail] = useState("");   
     const [password, setPassword] = useState("");
     

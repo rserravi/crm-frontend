@@ -8,8 +8,9 @@ export const Header = () => {
    
     const history = useNavigate();
     const LogMeOut = () =>{
-        userLogout();
         sessionStorage.removeItem("accessJWT");
+        localStorage.removeItem("crmSite");
+        userLogout();
         history("/");
     }
     return  (
