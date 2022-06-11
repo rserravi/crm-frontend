@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Spinner, Alert } from "react-bootstrap";
 import { BreadCrumbs } from "../../components/breadcrumbs/breadcrumbs-comp";
-import tickets from "../../assets/data/dummy-data.json"
 import { MessageHistory } from "../../components/message-history/MessageHistory-comp";
 import { UpdateTicket } from "../../components/update-ticket/UpdateTicket-comp";
 import { useParams } from "react-router-dom";
+import { fetchSingleTIcket } from "../ticket-list/ticket-Action";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Ticket = () => {
     const {tid} = useParams();
     const [message, setMessage] = useState("");
     const [ticket, setTicket] = useState("");
+    const dispatch = useDispatch();
+    const {isLoading, error, selectedTicket} = useSelector(state => state.tickets);
     useEffect(() =>{
-        for (let i = 0; i < tickets.length; i++){
-            if(tickets[i].id === tid){
-                setTicket(tickets[i]);
-                continue;
-         }
-        }
-    }, [message, tid]);
+        dispatch(fetchSingleTIcket(tid));
+    }, [message, tid, dispatch]);
 
     const handleOnChange = e =>{
         setMessage(e.target.value)
@@ -35,10 +33,16 @@ export const Ticket = () => {
                 </Col>
             </Row>
             <Row>
+                <Col>
+                   {isLoading && <Spinner variant="Primary" animation="border" />}
+                   {error && <Alert variant="danger">{error}</Alert>}
+                </Col>
+            </Row>
+            <Row>
                 <Col className="font-weight-bold text-secondary">
-                    <div className="subject"><b>Subject :</b>{ticket.subject}</div>
-                    <div className="date"><b>Date :</b>{ticket.addedAt}</div>
-                    <div className="status"><b>Status :</b>{ticket.status}</div>
+                    <div className="subject"><b>Subject : </b>{selectedTicket.subject}</div>
+                    <div className="date"><b>Date : </b>{selectedTicket.openAt}</div>
+                    <div className="status"><b>Status : </b>{selectedTicket.status}</div>
                 </Col>
                 <Col className="text-right">
                     <Button variant="outline-info">Close ticket</Button>
@@ -46,7 +50,7 @@ export const Ticket = () => {
             </Row>
             <Row className="mt-4">
                 <Col>
-                    {ticket.history && <MessageHistory msg = {ticket.history}></MessageHistory>}
+                    {selectedTicket.conversation && <MessageHistory msg = {selectedTicket.conversation}></MessageHistory>}
                 </Col>
             </Row>
             <Row className="mt-4">

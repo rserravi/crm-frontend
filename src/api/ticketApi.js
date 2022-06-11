@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const rootUrl = "http://localhost:3001/v1"
-const getTicketUrl = rootUrl + "/ticket"
+const getTicketUrl = rootUrl + "/ticket/"
 
 export const getAllTickets = async () => {
         try {
@@ -30,6 +30,7 @@ export const getSingleTicket = async (_id) => {
                 }
             }
         );
+        console.log("Result en getSingleTicket ticketApi :" + result);
         return result;
         
     } catch (error) {

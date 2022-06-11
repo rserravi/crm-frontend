@@ -4,7 +4,8 @@ const initialState = {
     tickets:[],
     isLoading : false,
     error: "",
-    searchTicketList: []
+    searchTicketList: [],
+    selectedTicket: {}
 }
 
 const ticketListSlice = createSlice({
@@ -30,6 +31,19 @@ const ticketListSlice = createSlice({
 
                 return row.subject.toLowerCase().includes(payload.toLowerCase());
             })
+        },
+        fetchSingleTicketLoading:(state)=>{
+            state.isLoading = true;
+        },
+        fetchSingleTicketSuccess:(state,{payload})=>{
+            console.log("El payload es :"+ payload);
+            state.selectedTicket = payload;
+            state.isLoading = false;
+            state.error = "";
+        },
+        fetchSingleTicketFail:(state,{payload})=>{
+            state.isLoading = false;
+            state.error = payload;
         }
     }
 });
@@ -40,5 +54,8 @@ export const {
     fetchTicketSuccess,
     fetchTicketFail,
     searchTickets,
+    fetchSingleTicketLoading,
+    fetchSingleTicketSuccess,
+    fetchSingleTicketFail
     } = actions;
 export default reducer;
