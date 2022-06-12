@@ -62,7 +62,6 @@ export const updateReplyTicket = (_id, msgObj) =>{
 export const updateTicketStatusClose = (_id) =>{
     return new Promise(async(resolve, reject) =>{
         try {
-            console.log(closeTicketUrl + _id);
             const result = await axios.patch(
                 closeTicketUrl + _id, {},
                 {headers: 
@@ -72,6 +71,28 @@ export const updateTicketStatusClose = (_id) =>{
                 }
             );
           
+            resolve (result.data);
+            
+        } catch (error) {
+            console.log(error.message);
+            reject(error);
+        } 
+    })
+};
+
+export const createNewTicket = (frmData) =>{
+    return new Promise(async(resolve, reject) =>{
+        try {
+            const result = await axios.post(
+                getTicketUrl, 
+                frmData,
+                {headers: 
+                    {
+                        Authorization: sessionStorage.getItem("accessJWT"),
+                    },
+                }
+            );
+            console.log(result.data);
             resolve (result.data);
             
         } catch (error) {
