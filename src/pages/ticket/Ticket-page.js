@@ -6,24 +6,16 @@ import { UpdateTicket } from "../../components/update-ticket/UpdateTicket-comp";
 import { useParams } from "react-router-dom";
 import { fetchSingleTIcket } from "../ticket-list/ticket-Action";
 import { useDispatch, useSelector } from "react-redux";
+import { closeTicket } from "../ticket-list/ticket-Action";
 
 export const Ticket = () => {
     const {tid} = useParams();
-    const [message, setMessage] = useState("");
-    const [ticket, setTicket] = useState("");
+    const [message] = useState("");
     const dispatch = useDispatch();
-    const {isLoading, error, selectedTicket} = useSelector(state => state.tickets);
+    const {isLoading, error, selectedTicket, replyMsg, replyTicketError} = useSelector(state => state.tickets);
     useEffect(() =>{
         dispatch(fetchSingleTIcket(tid));
     }, [message, tid, dispatch]);
-
-    const handleOnChange = e =>{
-        setMessage(e.target.value)
-    }
-
-    const handleOnSubmit = () =>{
-        alert("Form submited") //waiting to implement API
-    }
 
     return (
         <Container>
@@ -36,16 +28,23 @@ export const Ticket = () => {
                 <Col>
                    {isLoading && <Spinner variant="Primary" animation="border" />}
                    {error && <Alert variant="danger">{error}</Alert>}
+                   {replyTicketError && <Alert variant="danger">{replyTicketError}</Alert>}
+                   {replyMsg && <Alert variant="success">{replyMsg}</Alert>}
                 </Col>
             </Row>
             <Row>
                 <Col className="font-weight-bold text-secondary">
                     <div className="subject"><b>Subject : </b>{selectedTicket.subject}</div>
-                    <div className="date"><b>Date : </b>{selectedTicket.openAt}</div>
+                    <div className="date"><b>Date : </b>{selectedTicket.openAt && new Date(selectedTicket.openAt).toLocaleString()}</div>
                     <div className="status"><b>Status : </b>{selectedTicket.status}</div>
                 </Col>
                 <Col className="text-right">
-                    <Button variant="outline-info">Close ticket</Button>
+                    <Button 
+                        variant="outline-info" 
+                        onClick={() => dispatch(closeTicket(tid))}
+                        disabled = {selectedTicket.status === "closed"}
+                        >Close ticket
+                    </Button>
                 </Col>
             </Row>
             <Row className="mt-4">
@@ -55,7 +54,7 @@ export const Ticket = () => {
             </Row>
             <Row className="mt-4">
                 <Col>
-                    <UpdateTicket msg={message} handleOnChange={handleOnChange} handleOnSubmit={handleOnSubmit}></UpdateTicket>
+                    <UpdateTicket _id={tid}></UpdateTicket>
                 </Col>
             </Row>
         </Container>

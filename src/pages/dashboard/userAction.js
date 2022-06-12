@@ -11,6 +11,6 @@ export const getUserProfile = () => async(dispatch) =>{
 
         dispatch(getUserFail("User not found!"));
     } catch (error) {
-        dispatch(getUserFail(error.message))
+        dispatch(getUserFail(error))
     }
 }

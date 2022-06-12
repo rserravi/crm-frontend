@@ -63,7 +63,7 @@ export const fetchNewAccessJWT = () =>{
                 }
             });
             if(res.data.status ==="success"){
-                console.log(res.data.accessJWT);
+                console.log(res.data)
                 sessionStorage.setItem("accessJWT", res.data.accessJWT);   
             } 
             resolve(true);

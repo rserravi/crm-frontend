@@ -4,8 +4,10 @@ const initialState = {
     tickets:[],
     isLoading : false,
     error: "",
+    replyTicketError:"",
     searchTicketList: [],
-    selectedTicket: {}
+    selectedTicket: {},
+    replyMsg: ""
 }
 
 const ticketListSlice = createSlice({
@@ -36,12 +38,35 @@ const ticketListSlice = createSlice({
             state.isLoading = true;
         },
         fetchSingleTicketSuccess:(state,{payload})=>{
-            console.log("El payload es :"+ payload);
             state.selectedTicket = payload;
             state.isLoading = false;
             state.error = "";
         },
         fetchSingleTicketFail:(state,{payload})=>{
+            state.isLoading = false;
+            state.error = payload;
+        },
+        replyTicketLoading:(state)=>{
+            state.isLoading = true;
+        },
+        replyTicketSuccess:(state, {payload})=>{
+            state.isLoading = false;
+            state.error = "";
+            state.replyMsg = payload;
+        },
+        replyTicketFail:(state,{payload})=>{
+            state.isLoading = false;
+            state.replyTicketError = payload;
+        },
+        closeTicketLoading:(state)=>{
+            state.isLoading = true;
+        },
+        closeTicketSuccess:(state, {payload})=>{
+            state.isLoading = false;
+            state.error = "";
+            state.replyMsg = payload;
+        },
+        closeTicketFail:(state,{payload})=>{
             state.isLoading = false;
             state.error = payload;
         }
@@ -56,6 +81,12 @@ export const {
     searchTickets,
     fetchSingleTicketLoading,
     fetchSingleTicketSuccess,
-    fetchSingleTicketFail
+    fetchSingleTicketFail,
+    replyTicketLoading,
+    replyTicketSuccess,
+    replyTicketFail,
+    closeTicketLoading,
+    closeTicketSuccess,
+    closeTicketFail
     } = actions;
 export default reducer;
