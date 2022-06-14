@@ -10,6 +10,7 @@ import './App.css';
 import { PrivateRoute } from './components/private-route/PrivateRoute-comp';
 import { Dashboard } from './pages/dashboard/Dashboard-page';
 import { Entry } from './pages/entry/entry-page';
+import { Registration } from "./pages/registration/registration-page";
 import { AddTicket } from './pages/new-ticket/AddTicket-page';
 import { TicketLists } from './pages/ticket-list/TicketLists-page';
 import { Ticket } from './pages/ticket/Ticket-page';
@@ -18,15 +19,16 @@ function App() {
   return (
     <div className="App">
       <Router> 
-      <Routes>
-          <Route exact path='/' element={<Entry />}/>
-      </Routes>
-      <PrivateRoute path='/dashboard' element={<Dashboard />} />
-      <PrivateRoute path='/add-ticket' element={<AddTicket />} />
-      <PrivateRoute path='/tickets' element={<TicketLists />} />
-      <PrivateRoute path='/ticket/:tid' element={<Ticket />} />
-
-        
+        <Routes>
+            <Route exact path='/' element={<Entry />}/>
+        </Routes>
+        <Routes>
+          <Route exact path='registration' element={<Registration />}/>
+        </Routes>
+        <PrivateRoute path='/dashboard' element={<Dashboard />} />
+        <PrivateRoute path='/add-ticket' element={<AddTicket />} />
+        <PrivateRoute path='/tickets' element={<TicketLists />} />
+        <PrivateRoute path='/ticket/:tid' element={<Ticket />} />
       </Router>
     </div>
   );

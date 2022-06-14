@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { fetchSingleTIcket } from "../ticket-list/ticket-Action";
 import { useDispatch, useSelector } from "react-redux";
 import { closeTicket } from "../ticket-list/ticket-Action";
+import { resetResponseMsg } from "../ticket-list/ticket-Slice";
 
 export const Ticket = () => {
     const {tid} = useParams();
@@ -15,7 +16,10 @@ export const Ticket = () => {
     const {isLoading, error, selectedTicket, replyMsg, replyTicketError} = useSelector(state => state.tickets);
     useEffect(() =>{
         dispatch(fetchSingleTIcket(tid));
-    }, [message, tid, dispatch]);
+        return()=>{
+            (replyMsg || replyTicketError) && dispatch(resetResponseMsg());
+        }
+    }, [message, tid, dispatch, replyMsg, replyTicketError]);
 
     return (
         <Container>
