@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useState } from "react";
+import IntlTelInput from 'react-bootstrap-intl-tel-input'
 
 const initialState = {
     name : "",
@@ -22,14 +23,25 @@ const passVerificationError = {
 
 }
 
+var validPhone = false;
+
 const RegistrationForm = () =>{
  
     const [newUser, setNewUser] = useState(initialState);
     const [passwordError, setNewPasswordError] = useState(passVerificationError);
 
+
     useEffect(() => {},[newUser]);
 
     const handleOnChange = e => {
+        console.log(e);
+        if (!e.target) {
+            const name = "phone";
+            const value = e.phoneNumber;
+            setNewUser({...newUser, [name]:value});
+            validPhone = e.valid;
+            return
+        } 
         const {name, value} = e.target;
 
         setNewUser({...newUser, [name]:value});
@@ -47,6 +59,12 @@ const RegistrationForm = () =>{
         if (name === "confirmPassword"){
             setNewPasswordError({...passwordError, confirmPass: newUser.password === value});
         }
+    
+    }
+
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+        console.log(newUser);
     }
 
     console.log(newUser);
@@ -60,7 +78,7 @@ const RegistrationForm = () =>{
                 </Col>
             </Row>
 
-                <Form>
+                <Form onSubmit={handleOnSubmit}>
                     <Row>
                         <Form.Group as={Col} className="mb-3" >
                             <Form.Label >Full Name</Form.Label>
@@ -74,12 +92,21 @@ const RegistrationForm = () =>{
 
                         <Form.Group as={Col} className="mb-3">
                             <Form.Label>Phone</Form.Label>
-                            <Form.Control 
-                                type="number" 
+                            <Form.Control as={IntlTelInput}
                                 name="phone" 
                                 value={newUser.phone} 
-                                placeholder="Enter phone number" />   
-                    </Form.Group>
+                                placeholder="Enter phone number"
+                                preferredCountries={['ES', 'AR']}
+                                defaultCountry={'ES'}
+                                defaultValue={''}
+                                onChange={handleOnChange}
+                                minLengthMessage="Too short"
+                                maxLengthMessage="Too long"
+                                callingCodeMessage=""
+                                catchAllMessage="Not valid"
+                                validMessage="Valid"
+                                />  
+                        </Form.Group>
                     </Row>
                     <Row>
                         <Form.Group as={Col} className="mb-3">
@@ -146,10 +173,15 @@ const RegistrationForm = () =>{
                         <li className={passwordError.hasSpecial ? "text-success" : "text-danger"}>At least one of the special characters .-_:!"@·#$%&/)=+*</li>
                     </ul>
 
-                    <Button variant="primary" type="submit" disabled={Object.values(passwordError).includes(false)}>
+                    <Button variant="primary" type="submit" disabled={Object.values(passwordError).includes(false) || !validPhone}>
                         Submit
                     </Button>
-                </Form>     
+                </Form>   
+            <Row>
+                <Col className="py-3">
+                Already have an account? <a href="/">Login now</a>
+                </Col>
+            </Row>  
         </Container>
     )
 }
