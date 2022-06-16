@@ -12,10 +12,8 @@ export const Dashboard = () => {
     const {tickets} = useSelector(state => state.tickets)
 
     useEffect(() => {
-        if(!tickets.length){
             dispatch(fetchAllTIckets());
-        }
-    }, [tickets, dispatch])
+    }, [dispatch])
 
     const pendingTickets = tickets.filter(row=> row.status !== "closed")
     return (

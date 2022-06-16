@@ -7,6 +7,7 @@ export const fetchAllTIckets = () => async (dispatch) => {
     // Fetch data from API
     try {
         const result = await getAllTickets();
+        if (!result){dispatch(fetchSingleTicketFail("No hay tickets"))}
         dispatch(fetchTicketSuccess(result.data.result));
     } catch (error) {
        dispatch(fetchTicketFail(error.message));

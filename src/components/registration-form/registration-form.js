@@ -8,13 +8,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 const initialState = {
-    name : "Ruben Serra",
-    phone : "0034722303012",
-    email : "e@e.com",
-    company : "Rubotic",
-    address : "5ft ave New York",
-    password : "Password_1235",
-    confirmPassword : "Password_1235"
+    name : "",
+    phone : "",
+    email : "",
+    company : "",
+    address : "",
+    password : "",
+    confirmPassword : ""
 }
 
 const passVerificationError = {
@@ -39,7 +39,6 @@ const RegistrationForm = () =>{
     useEffect(() => {},[newUser]);
 
     const handleOnChange = e => {
-        console.log(e);
         if (!e.target) {
             const name = "phone";
             const value = e.intlPhoneNumber;
@@ -78,7 +77,6 @@ const RegistrationForm = () =>{
     //email user a link to verify the email
     //create frontend page to handle email verification than client recieves in ther email
 
-    console.log(newUser);
 
     return (
         <Container>

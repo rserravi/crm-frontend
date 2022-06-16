@@ -1,0 +1,21 @@
+.verification-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+}
+
+.jumbotron {
+    margin-top: 50px;
+    position: relative;
+    background-color: whitesmoke;
+    min-height: 400px;
+    background-size: 100%;
+    padding: 10px;
+    box-shadow: 0px 0px 15px -5px;
+  }
+
+li {
+    font-size: small;
+}

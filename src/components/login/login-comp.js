@@ -43,7 +43,6 @@ export const LoginForm = ({formSwitcher}) =>{
 
             try {
                 const isAuth = await userLogin({email, password});
-
                 if(isAuth.status === "error"){
                     return dispatch(loginFail(isAuth.message));
                 }

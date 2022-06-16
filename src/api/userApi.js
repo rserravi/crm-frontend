@@ -5,6 +5,7 @@ const loginUrl = rootUrl + "/user/login";
 const userProfileUrl = rootUrl + "/user";
 const logOutUrl = rootUrl + "/user/logout";
 const newAccessJWTurl = rootUrl + "/tokens";
+const userVerificationUrl = userProfileUrl + "/verify"
 
 export const userLogin = (frmData) =>{
     return new Promise( async(resolve, reject)=>{
@@ -16,9 +17,9 @@ export const userLogin = (frmData) =>{
             if(res.data.status ==="success"){
                 sessionStorage.setItem("accessJWT", res.data.accessJWT);
                 localStorage.setItem(
-                    "crmSite", 
-                    JSON.stringify({refreshJWT: res.data.refreshJWT})
-                 );
+                  "crmSite",
+                  JSON.stringify({ refreshJWT: res.data.refreshJWT })
+                );
             }
         } catch (error) {
             reject(error);
@@ -27,10 +28,10 @@ export const userLogin = (frmData) =>{
 }
 
 export const userRegistrationAPI = (frmData) =>{
+
     return new Promise( async(resolve, reject)=>{
         try {
             const res = await axios.post(userProfileUrl, frmData);
-
             resolve(res.data);
 
             if(res.data.status ==="success"){
@@ -41,6 +42,25 @@ export const userRegistrationAPI = (frmData) =>{
         }
     })
 }
+
+export const userRegistrationVerification = (frmData) =>{
+    return new Promise( async(resolve, reject)=>{
+        try {
+            const res = await axios.patch(userVerificationUrl, frmData);
+
+            resolve(res.data);
+            console.log("Status en userRegistration");
+            console.log(res.data);
+            if(res.data.status ==="success"){
+               resolve(res.data)
+            }
+        } catch (error) {
+            console.log("Error en userRegistration");
+            reject({status:"error", message:error.error});
+        }
+    })
+}
+
 
 export const fetchUser = () =>{
     return new Promise( async(resolve, reject)=>{

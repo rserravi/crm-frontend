@@ -14,6 +14,7 @@ import { Registration } from "./pages/registration/registration-page";
 import { AddTicket } from './pages/new-ticket/AddTicket-page';
 import { TicketLists } from './pages/ticket-list/TicketLists-page';
 import { Ticket } from './pages/ticket/Ticket-page';
+import { UserVerification } from './pages/user-verification/user-verification.page';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         </Routes>
         <Routes>
           <Route exact path='registration' element={<Registration />}/>
+          <Route exact path='verification/:randomUrl/:email' element={<UserVerification />} />
         </Routes>
         <PrivateRoute path='/dashboard' element={<Dashboard />} />
         <PrivateRoute path='/add-ticket' element={<AddTicket />} />

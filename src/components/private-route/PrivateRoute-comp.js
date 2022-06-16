@@ -31,7 +31,7 @@ export const PrivateRoute = (children, ...rest) => {
           <Route {...rest} element={<DefaultLayout>{children.element}</DefaultLayout>} path={children.path} />
       </Routes>
     )
-    if (location !== "/" && location !=="/registration"){
+    if (location !== "/" && location !=="/registration" && location.substring(0,13) !=="/verification"){
       return(
         <Navigate to= "/"></Navigate>
       )
